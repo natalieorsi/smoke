@@ -1,4 +1,6 @@
 //Created and maintained by Natalie Orsi at http://natalieorsi.net
+//Inspired by a project by Daniel Shiffman
+
 // texture for the particle
 var particle_texture = null;
 
@@ -6,21 +8,25 @@ var particle_texture = null;
 var ps = null;
 
 function preload() {
+    particle_texture = loadImage("data/smoke.png");
 }
 
 function setup() {
 
     //set the canvas size
-    createCanvas(640,360);
+    //createCanvas(640,360);
+    createCanvas(window.innerWidth, window.innerHeight);
 
     //initialize our particle system
-    ps = new ParticleSystem(0,createVector(width / 2, height - 60),particle_texture);
+    ps = new ParticleSystem(1,createVector(width / 2, height/2),particle_texture);
 }
 
 function draw() {
     background(0);
 
-    var dx = map(mouseX,0,width,-0.2,0.2);
+    var rand1 = random(-.8,0)
+    var rand2 = random(0,.8)
+    var dx = map(mouseX,0,width,rand1,rand2);
     var wind = createVector(dx,0);
 
     ps.applyForce(wind);
@@ -29,26 +35,8 @@ function draw() {
         ps.addParticle();
     }
 
-    // Draw an arrow representing the wind force
-    drawVector(wind, createVector(width/2,50,0),500);
 }
 
-/**
- *  This function draws an arrow showing the direction our "wind" is blowing.
- */
-function drawVector(v,loc,scale){
-    push();
-    var arrowsize = 4;
-    translate(loc.x,loc.y);
-    stroke(255);
-    rotate(v.heading());
-
-    var len = v.mag() * scale;
-    line(0,0,len,0);
-    line(len,0,len-arrowsize,+arrowsize/2);
-    line(len,0,len-arrowsize,-arrowsize/2);
-    pop();
-}
 //========= PARTICLE SYSTEM ===========
 
 /**
@@ -61,7 +49,7 @@ function drawVector(v,loc,scale){
 var ParticleSystem = function(num,v,img_) {
 
     this.particles = [];
-    this.origin = v.copy(); // we make sure to copy the vector value in case we accidentally mutate the original by accident
+    this.origin = v.copy();
     this.img = img_
     for(var i = 0; i < num; ++i){
         this.particles.push(new Particle(this.origin,this.img));
@@ -123,7 +111,7 @@ var Particle = function (pos, img_) {
 
     this.vel = createVector(vx,vy);
     this.acc = createVector();
-    this.lifespan = 150.0;
+    this.lifespan = 100.0;
     this.texture = img_;
 }
 
