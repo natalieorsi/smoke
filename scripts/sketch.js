@@ -14,7 +14,9 @@ function preload() {
 function setup() {
     //set the canvas size
     //createCanvas(640,360);
-    createCanvas(.9*window.innerWidth, .9*window.innerHeight);
+    canvas = createCanvas(.9*window.innerWidth, .9*window.innerHeight);
+    canvas.position(window.innerWidth*.05, window.innerHeight*.05);
+    canvas.class("fireflies");
     systems = [];
     //initialize our particle system
 }
