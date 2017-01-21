@@ -4,25 +4,19 @@
 // texture for the particle
 var particle_texture = null;
 
-// variable holding our particle system
-var ps1 = null;
-var ps2 = null;
+// variable holding our particle systems
+var systems;
 
 function preload() {
     particle_texture = loadImage("data/smoke.png");
 }
 
 function setup() {
-
     //set the canvas size
     //createCanvas(640,360);
     createCanvas(window.innerWidth, window.innerHeight);
-
+    systems = [];
     //initialize our particle system
-    var rand1 = random(0,4)
-    var rand2 = random(0,4)
-    ps1 = new ParticleSystem(rand1, createVector(random(0,width),random(0,height)),particle_texture);
-    ps2 = new ParticleSystem(rand2, createVector(random(0,width),random(0,height)),particle_texture);
 }
 
 function draw() {
@@ -30,22 +24,24 @@ function draw() {
 
     var rand1 = random(-1,0)
     var rand2 = random(0,1)
-    var rand3 = random(-2,2)
+    
     var dx = map(mouseX,0,width,rand1,rand2);
-    //var dy = map(0, -mouseY, height, rand2, rand1);
-    var wind = createVector(-dx,rand3);
 
-    ps1.applyForce(wind);
-    ps1.run();
-    ps2.applyForce(wind);
-    ps2.run();
-    for (var i = 0; i < 2; i++) {
-        ps1.addParticle();
-        ps2.addParticle();
+    for (j = 0; j<systems.length; i++){
+      var rand3 = random(-2,2)
+      var wind = createVector(-dx,rand3);
+      systems[j].applyForce(wind);
+
+      systems[j].run();
+      systems[j].addParticle();
     }
-
 }
 
+function mousePressed() {
+  var rand1 = random(0,4)
+  this.p = new ParticleSystem(rand1, createVector(random(0,width),random(0,height)),particle_texture);
+  systems.push(p);
+}
 //========= PARTICLE SYSTEM ===========
 
 /**
