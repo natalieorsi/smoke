@@ -14,7 +14,7 @@ function preload() {
 function setup() {
     //set the canvas size
     //createCanvas(640,360);
-    createCanvas(window.innerWidth, window.innerHeight);
+    createCanvas(.9*window.innerWidth, .9*window.innerHeight);
     systems = [];
     //initialize our particle system
 }
