@@ -17,6 +17,7 @@ function setup() {
     canvas = createCanvas(.9*window.innerWidth, .9*window.innerHeight);
     canvas.position(window.innerWidth*.05, window.innerHeight*.05);
     canvas.class("fireflies");
+    canvas.parent("bottle");
     systems = [];
     //initialize our particle system
 }
