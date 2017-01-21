@@ -19,7 +19,10 @@ function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
 
     //initialize our particle system
-    ps1 = new ParticleSystem(1,createVector(random(0,width),random(0,height)),particle_texture);
+    var rand1 = random(0,4)
+    var rand2 = random(0,4)
+    ps1 = new ParticleSystem(rand1, createVector(random(0,width),random(0,height)),particle_texture);
+    ps2 = new ParticleSystem(rand2, createVector(random(0,width),random(0,height)),particle_texture);
 }
 
 function draw() {
@@ -34,8 +37,11 @@ function draw() {
 
     ps1.applyForce(wind);
     ps1.run();
+    ps2.applyForce(wind);
+    ps2.run();
     for (var i = 0; i < 2; i++) {
         ps1.addParticle();
+        ps2.addParticle();
     }
 
 }
