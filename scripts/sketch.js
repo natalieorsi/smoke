@@ -41,7 +41,7 @@ function mousePressed() {
   var rand1 = random(0,4)
   this.p = new ParticleSystem(rand1, createVector(mouseX,mouseY),particle_texture);
   systems.push(p);
-  if (systems.length > 2) {
+  if (systems.length > 8) {
     systems.splice(0,1);
   }
 }
@@ -119,7 +119,7 @@ var Particle = function (pos, img_) {
 
     this.vel = createVector(vx,vy);
     this.acc = createVector();
-    this.lifespan = 100.0;
+    this.lifespan = 20.0;
     this.texture = img_;
 }
 
