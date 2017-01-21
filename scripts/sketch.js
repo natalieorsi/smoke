@@ -2,7 +2,7 @@
 //Inspired by a project by Daniel Shiffman
 
 // texture for the particle
-var particle_texture = null;
+var particle_texture;
 
 // variable holding our particle systems
 var systems;
@@ -27,7 +27,7 @@ function draw() {
     
     var dx = map(mouseX,0,width,rand1,rand2);
 
-    for (j = 0; j<systems.length; i++){
+    for (var j = 0; j < systems.length; ++j) {
       var rand3 = random(-2,2)
       var wind = createVector(-dx,rand3);
       systems[j].applyForce(wind);
@@ -39,7 +39,7 @@ function draw() {
 
 function mousePressed() {
   var rand1 = random(0,4)
-  this.p = new ParticleSystem(rand1, createVector(random(0,width),random(0,height)),particle_texture);
+  this.p = new ParticleSystem(rand1, createVector(mouseX,mouseY),particle_texture);
   systems.push(p);
 }
 //========= PARTICLE SYSTEM ===========
