@@ -41,6 +41,9 @@ function mousePressed() {
   var rand1 = random(0,4)
   this.p = new ParticleSystem(rand1, createVector(mouseX,mouseY),particle_texture);
   systems.push(p);
+  if (systems.length > 2) {
+    systems.splice(0,1);
+  }
 }
 //========= PARTICLE SYSTEM ===========
 
